@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/HackGT/checkin/issues"
   },
-  "homepage": "https://github.com/HackGT/checkin#readme"
+  "homepage": "https://github.com/HackGT/checkin#readme",
+  "devDependencies": {
+    "bower": "^1.7.9"
+  }
 }
