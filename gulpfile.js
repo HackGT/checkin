@@ -3,7 +3,11 @@ var concat = require('gulp-concat');
 var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 
-var jsFiles = ['app/src/**/*.js', 'app/views/**/*.js'];
+var jsFiles = [
+  'app/src/**/*.js',
+  'app/views/**/*.js',
+  'app/config/config.js',
+];
 
 function swallowError (error) {
     console.log(error.toString());

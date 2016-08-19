@@ -3,3 +3,4 @@ dist
 npm-debug.log
 bower_components
 app/build
+app/config/config.js

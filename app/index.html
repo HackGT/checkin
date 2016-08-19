@@ -9,25 +9,25 @@
   <title>Check in!</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-  <link rel="stylesheet" href="app.css">
-  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+  <link rel="stylesheet" href="bower_components/semantic/dist/semantic.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="stylesheets/app.css">
 </head>
 <body>
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
-  <div ui-view></div>
+  <div class="container" ui-view></div>
   <a ui-sref="login">login</a>
+  <a ui-sref="checkin">checkin</a>
 
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
+  <!-- Angular app -->
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-  <script src="app.js"></script>
-  <script src="routes.js"></script>
+  <script src="build/app.js"></script>
+
+  <!-- UI javascript -->
+  <script async src="bower_components/jquery/dist/jquery.js"></script>
+  <script async src="bower_components/semantic/dist/semantic.js"></script>
 </body>
 </html>
