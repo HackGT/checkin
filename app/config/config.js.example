@@ -1,0 +1,8 @@
+/**
+ * Here lay the base urls used in the http url injector
+ * Please copy this file in the same directory and change
+ * the urls to match your config.
+ */
+ angular.module('checkin').constant('SERVER_URL', {
+   BASE_URL:  'http://localhost:4000/',
+ });
