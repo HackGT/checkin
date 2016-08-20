@@ -1,8 +1,12 @@
-<div>
-  <h1>Login</h1>
-  <form ng-submit="login()">
-    <input type="text" ng-model="email" placeholder="email...">
-    <input type="password" ng-model="password" value="password...">
-    <input type="submit" name="login" value="Login">
+<div class="ui two column centered grid">
+  <form class="ui form sixteen wide phone six wide computer column" ng-submit="login()">
+    <h1>Login</h1>
+    <div class="field">
+      <input type="text" ng-model="email" placeholder="email...">
+    </div>
+    <div class="field">
+      <input type="password" ng-model="password" placeholder="password...">
+    </div>
+    <button type="submit" class="ui button">Login</button>
   </form>
 </div>
