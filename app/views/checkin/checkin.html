@@ -1,9 +1,22 @@
 <div>
   <h1>Checkin!</h1>
-  <ul
+  <table class="ui single line selectable table"
     infinite-scroll='users.getNextPage()'
     infinite-scroll-disabled='users.busy || users.nextPage >= users.totalPages'
-    infinite-scroll-distance='1'>
-    <li ng-repeat='user in users.users'>{{user._id}} {{user.email}}</li>
-  </ul>
+    infinite-scroll-distance='3'>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        class="ui item"
+        ng-repeat='user in users.users'>
+        <td>{{user.profile.name}}</td>
+        <td>{{user.email}}</td>
+      </tr>
+    </tbody>
+  </div>
 </div>
