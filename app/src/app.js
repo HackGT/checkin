@@ -4,22 +4,29 @@ var app = angular.module('checkin', [
 
 app.config([
   '$httpProvider',
-  'SERVER_URL',
   function($httpProvider, SERVER_URL) {
-    $httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
     // add root url to all api and auth requests
-    $httpProvider.interceptors.push(function() {
-      return {
-        request: function(config) {
-          if (config.url.indexOf('api/') === 0 || config.url.indexOf('auth/') === 0) {
-            config.url = SERVER_URL.BASE_URL + config.url;
-            config.headers['Access-Control-Allow-Origin'] = '*';
-          }
-          console.log(config);
-          return config;
+    $httpProvider.interceptors.push('ApiAuthenticator');
+  }
+]);
+
+app.factory('ApiAuthenticator', [
+  'Session',
+  'SERVER_URL',
+  function(Session, SERVER_URL) {
+    return {
+      request: function(config) {
+        if (config.url.indexOf('api/') === 0 || config.url.indexOf('auth/') === 0) {
+          config.url = SERVER_URL.BASE_URL + config.url;
+          config.headers['Access-Control-Allow-Origin'] = SERVER_URL.BASE_URL;
         }
-      };
-    });
+        var token = Session.getToken();
+        if (token) {
+          config.headers['x-access-token'] = token;
+        }
+        return config;
+      }
+    };
   }
 ]);
