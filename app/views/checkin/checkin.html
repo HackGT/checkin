@@ -1,6 +1,9 @@
 <div>
   <h1>Checkin!</h1>
-  <ul>
-    <li>person</li>
+  <ul
+    infinite-scroll='users.getNextPage()'
+    infinite-scroll-disabled='users.busy || users.nextPage >= users.totalPages'
+    infinite-scroll-distance='1'>
+    <li ng-repeat='user in users.users'>{{user._id}} {{user.email}}</li>
   </ul>
 </div>

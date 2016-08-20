@@ -14,6 +14,7 @@ angular.module('checkin')
           .state('checkin', {
             url: '/checkin',
             templateUrl: 'views/checkin/checkin.html',
+            controller: 'CheckinController',
           });
     }
   ]);

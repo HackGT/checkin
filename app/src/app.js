@@ -1,5 +1,6 @@
 var app = angular.module('checkin', [
   'ui.router',
+  'infinite-scroll',
 ]);
 
 app.config([
