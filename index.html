@@ -1,33 +1,25 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="checkin" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="checkin" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="checkin" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="checkin" class="no-js"> <!--<![endif]-->
+<html lang="en" ng-app="checkin">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Check in!</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.css" media="screen" title="no title" charset="utf-8">
-  <link rel="stylesheet" href="stylesheets/app.css">
+  <link rel="stylesheet" href="build/ui.min.css" media="screen" title="no title" charset="utf-8">
+  <link rel="stylesheet" href="build/app.min.css">
 </head>
 <body>
-  <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
 
-  <div class="container" ui-view></div>
+  <div class="ui container" ui-view></div>
   <a ui-sref="login">login</a>
   <a ui-sref="checkin">checkin</a>
 
   <!-- Angular app -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.js"></script>
-  <script src="build/app.js"></script>
+  <script src="build/angulars.min.js"></script>
+  <script src="build/app.min.js"></script>
 
   <!-- UI javascript -->
-  <script async src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
-  <script async src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.js"></script>
+  <script async src="build/ui.min.js"></script>
 </body>
 </html>
