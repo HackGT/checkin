@@ -11,6 +11,19 @@ angular.module('checkin')
         totalPages: Infinity,
       };
 
+      $scope.selectedUser = null;
+      $scope.setSelectedUser = function(user) {
+        var $userDetails = $('.ui.modal.userDetails');
+        $userDetails.modal();
+        $scope.selectedUser = user;
+        if (user) {
+          $userDetails.modal('show');
+        } else {
+          $userDetails.modal('hide');
+        }
+      };
+
+
       $scope.users.getNextPage = function() {
         if (this.busy) { return; }
         if (this.nextPage >= this.totalPages) { return; }
