@@ -1,9 +1,12 @@
 var gulp = require('gulp');
 var es = require('event-stream');
+
 var concat = require('gulp-concat');
 var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var minifyCss = require('gulp-minify-css');
+
+var shell = require('gulp-shell');
 
 var libFiles = {
   js: {
@@ -78,3 +81,7 @@ gulp.task('watch', ['build'], function() {
   gulp.watch(jsFiles, ['js']);
   gulp.watch(cssFiles, ['css']);
 });
+
+gulp.task('deploy', shell.task([
+  'sh push-to-ghpages.sh',
+]));
