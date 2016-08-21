@@ -1,4 +1,4 @@
-<div>
+<div class='checkin'>
   <h1>Checkin!</h1>
   <table class="ui single line selectable table"
     infinite-scroll='users.getNextPage()'
@@ -7,7 +7,9 @@
     <thead>
       <tr>
         <th>Name</th>
+        <th>School</th>
         <th>Email</th>
+        <th>Phone</th>
       </tr>
     </thead>
     <tbody>
@@ -15,8 +17,13 @@
         class="ui item"
         ng-repeat='user in users.users'>
         <td>{{user.profile.name}}</td>
+        <td>{{user.profile.school}}</td>
         <td>{{user.email}}</td>
+        <td>{{user.confirmation.phoneNumber}}</td>
       </tr>
     </tbody>
+  </table>
+  <div ng-show="users.busy">
+    Loading...
   </div>
 </div>
