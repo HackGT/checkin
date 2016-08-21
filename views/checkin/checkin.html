@@ -1,5 +1,18 @@
 <div class='checkin'>
   <h1>Checkin!</h1>
+  <div class="ui modal userDetails">
+    <div class="header">Hacker Details</div>
+    <div class="content">
+      {{selectedUser.profile.name}}
+      {{selectedUser.email}}
+    </div>
+    <div class="actions">
+      <div class="ui button"
+        ng-click="setSelectedUser(null)">
+        Close
+      </div>
+    </div>
+  </div>
   <table class="ui single line selectable table"
     infinite-scroll='users.getNextPage()'
     infinite-scroll-disabled='users.busy || users.nextPage >= users.totalPages'
@@ -15,7 +28,8 @@
     <tbody>
       <tr
         class="ui item"
-        ng-repeat='user in users.users'>
+        ng-repeat="user in users.users"
+        ng-click="setSelectedUser(user)">
         <td>{{user.profile.name}}</td>
         <td>{{user.profile.school}}</td>
         <td>{{user.email}}</td>
