@@ -1,1 +1,5 @@
 /* app css stylesheet */
+
+#login .column {
+  max-width: 450px;
+}
