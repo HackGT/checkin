@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Check in!</title>
+  <title ng-bind='title'></title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="build/ui.min.css" media="screen" title="no title" charset="utf-8">
@@ -11,9 +11,7 @@
 </head>
 <body>
 
-  <div class="ui container" ui-view></div>
-  <a ui-sref="login">login</a>
-  <a ui-sref="checkin">checkin</a>
+  <div ui-view></div>
 
   <!-- Angular app -->
   <script src="build/angulars.min.js"></script>

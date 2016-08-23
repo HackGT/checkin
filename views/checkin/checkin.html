@@ -1,5 +1,40 @@
 <div class='checkin'>
-  <h1>Checkin!</h1>
+  <h1 class="ui header">Checkin!</h1>
+  <div class="">
+    <table class="ui single line selectable table"
+      infinite-scroll='users.getNextPage()'
+      infinite-scroll-disabled='users.busy || users.nextPage >= users.totalPages'
+      infinite-scroll-distance='3'>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>School</th>
+          <th>Email</th>
+          <th>Phone</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          class="ui item"
+          ng-repeat="user in users.users"
+          ng-click="setSelectedUser(user)">
+          <td>{{user.profile.name}}</td>
+          <td>{{user.profile.school}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.confirmation.phoneNumber}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div ng-show="users.busy" class="ui icon message">
+    <i class="notched circle loading icon"></i>
+    <div class="content">
+      <div class="header">
+        Just one second
+      </div>
+      <p>We're fetching that content for you.</p>
+    </div>
+  </div>
   <div class="ui modal userDetails">
     <div class="header">{{selectedUser.profile.name}}</div>
     <div class="content">
@@ -11,32 +46,5 @@
         Close
       </div>
     </div>
-  </div>
-  <table class="ui single line selectable table"
-    infinite-scroll='users.getNextPage()'
-    infinite-scroll-disabled='users.busy || users.nextPage >= users.totalPages'
-    infinite-scroll-distance='3'>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>School</th>
-        <th>Email</th>
-        <th>Phone</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        class="ui item"
-        ng-repeat="user in users.users"
-        ng-click="setSelectedUser(user)">
-        <td>{{user.profile.name}}</td>
-        <td>{{user.profile.school}}</td>
-        <td>{{user.email}}</td>
-        <td>{{user.confirmation.phoneNumber}}</td>
-      </tr>
-    </tbody>
-  </table>
-  <div ng-show="users.busy">
-    Loading...
   </div>
 </div>
