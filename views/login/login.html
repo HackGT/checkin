@@ -1,12 +1,20 @@
-<div class="ui two column centered grid">
-  <form class="ui form sixteen wide phone six wide computer column" ng-submit="login()">
-    <h1>Login</h1>
-    <div class="field">
-      <input type="text" ng-model="email" placeholder="email...">
-    </div>
-    <div class="field">
-      <input type="password" ng-model="password" placeholder="password...">
-    </div>
-    <button type="submit" class="ui button">Login</button>
-  </form>
+<div class="ui middle aligned center aligned grid" id="login">
+  <div class="column">
+    <form class="ui large form" ng-submit="login()">
+      <div class="ui top attached segment header">
+        <h1>Login</h1>
+      </div>
+      <div class="ui attached segment">
+        <div class="field">
+          <input type="text" ng-model="email" placeholder="email...">
+        </div>
+        <div class="field">
+          <input type="password" ng-model="password" placeholder="password...">
+        </div>
+      </div>
+      <div class="ui bottom attached segment">
+        <button type="submit" class="ui fluid large primary submit button">Login</button>
+      </div>
+    </form>
+  </div>
 </div>
