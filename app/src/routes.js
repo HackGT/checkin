@@ -36,6 +36,8 @@ angular.module('checkin')
             templateUrl: 'views/checkin/checkin.html',
             controller: 'CheckinController',
           });
+
+        $urlRouterProvider.otherwise('/');
     }
   ])
   .run([
@@ -58,7 +60,10 @@ angular.module('checkin')
           event.preventDefault();
           $state.go('login');
         }
-
       });
+
+      if (!Session.getToken()) {
+        $state.go('login');
+      }
     }
   ]);
