@@ -5,11 +5,14 @@
 
 echo "- cloning checkin repo into temporary dir"
 git clone git@github.com:HackGT/checkin.git --branch gh-pages __gh-pages-tmp__
+rm -r __gh-pages-tmp__/build
+rm -r __gh-pages-tmp__/views
 
 echo "- copying built content into temporary dir"
 cd app
 cp index.html ../__gh-pages-tmp__
-rsync -R build/* ../__gh-pages-tmp__
+rsync -r build/* ../__gh-pages-tmp__/build
+rsync -R views/*.html ../__gh-pages-tmp__
 rsync -R views/**/*.html ../__gh-pages-tmp__
 cd ../__gh-pages-tmp__
 
