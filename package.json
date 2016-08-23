@@ -18,6 +18,7 @@
   "homepage": "https://github.com/HackGT/checkin#readme",
   "devDependencies": {
     "bower": "^1.7.9",
+    "del": "^2.2.2",
     "event-stream": "^3.3.4",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",

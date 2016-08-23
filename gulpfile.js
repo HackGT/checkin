@@ -7,6 +7,7 @@ var uglify = require('gulp-uglify');
 var minifyCss = require('gulp-minify-css');
 
 var shell = require('gulp-shell');
+var del = require('del');
 
 var libFiles = {
   js: {
@@ -22,6 +23,12 @@ var libFiles = {
   },
   css: [
     'app/bower_components/semantic/dist/semantic.min.css',
+    'app/bower_components/semantic/dist/components/message.min.css',
+  ],
+  assets: [
+    'app/bower_components/semantic/dist/**/*.woff2',
+    'app/bower_components/semantic/dist/**/*.woff',
+    'app/bower_components/semantic/dist/**/*.ttf',
   ],
 };
 
@@ -53,6 +60,8 @@ gulp.task('libs', function() {
     gulp.src(libFiles.css)
       .pipe(concat('ui.min.css'))
       .pipe(gulp.dest(buildDest)),
+    gulp.src(libFiles.assets)
+      .pipe(gulp.dest(buildDest)),
   ]);
 });
 
@@ -80,6 +89,10 @@ gulp.task('build', ['libs', 'js', 'css'], function() {});
 gulp.task('watch', ['build'], function() {
   gulp.watch(jsFiles, ['js']);
   gulp.watch(cssFiles, ['css']);
+});
+
+gulp.task('clean', function() {
+  return del([buildDest + "/**/*"]);
 });
 
 gulp.task('deploy', shell.task([
