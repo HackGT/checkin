@@ -21,9 +21,9 @@ angular.module('checkin')
               '@': {
                 templateUrl: "views/base.html",
               },
-              'sidebar@app': {
-                templateUrl: "views/sidebar/sidebar.html",
-                controller: 'SidebarController',
+              'toolbar@app': {
+                templateUrl: "views/toolbar/toolbar.html",
+                controller: 'ToolbarController',
               },
             },
             data: {

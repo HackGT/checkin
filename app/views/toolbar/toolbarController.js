@@ -1,5 +1,5 @@
 angular.module('checkin')
-  .controller('SidebarController', [
+  .controller('ToolbarController', [
     '$scope',
     '$state',
     'Session',
