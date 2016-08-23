@@ -12,6 +12,7 @@ angular.module('checkin')
             controller: 'LoginController',
             data: {
               requireLogin: false,
+              pageTitle: 'Login',
             },
           })
           .state('app', {
@@ -27,6 +28,7 @@ angular.module('checkin')
             },
             data: {
               requireLogin: true,
+              pageTitle: 'Checkin',
             },
           })
           .state('app.checkin', {
