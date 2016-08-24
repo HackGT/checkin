@@ -10,9 +10,14 @@ angular.module('checkin')
       });
 
       var currentQuery = null;
+      // only return new query if length >= 3, else return
       function getQuery() {
+        if (!$scope.query) {
+          return null;
+        } else if ($scope.query.length > 0 && $scope.query.length < 3) {
+          return currentQuery;
+        }
         return $scope.query;
-        // return ($scope.query && $scope.query.length >= 3) ? $scope.query : null;
       }
 
       $scope.searchUsers = function() {
