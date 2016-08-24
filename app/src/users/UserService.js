@@ -10,6 +10,7 @@ angular.module('checkin')
       var UserService = {};
 
       UserService.getUsers = function(options) {
+        // TODO [adai] yes this is kinda dumb and should be better
         var url = options ? users + '?' + $.param(
           {
             text: options.text,

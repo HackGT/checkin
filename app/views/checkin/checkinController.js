@@ -9,13 +9,40 @@ angular.module('checkin')
         context: '.userList > table',
       });
 
-      $scope.users = {
-        users: [],
-        busy: false,
-        nextPage: 0,
-        totalPages: Infinity,
-        totalUsers: 0,
+      var currentQuery = null;
+      function getQuery() {
+        return $scope.query;
+        // return ($scope.query && $scope.query.length >= 3) ? $scope.query : null;
+      }
+
+      $scope.searchUsers = function() {
+        var query = getQuery();
+        console.log("query:", query);
+        if (query === currentQuery) { return; }
+
+        // this is all a low-key workaround for $http's lack of cancel()
+        var thisQuery = currentQuery = UserService.getUsers({
+          text: query,
+        });
+        thisQuery.then(function(response) {
+          // if this is no longer the most recent query, then ignore
+          if (thisQuery !== currentQuery) { return; }
+          resetUserList();
+          loadFromResponse.bind($scope.users)(response);
+        });
       };
+
+      $scope.users = {};
+      function resetUserList() {
+        $scope.users = {
+          users: [],
+          busy: false,
+          nextPage: 0,
+          totalPages: 0,
+          totalUsers: 0,
+        };
+      }
+      resetUserList();
 
       $scope.selectedUser = null;
       $scope.setSelectedUser = function(user) {
@@ -29,43 +56,47 @@ angular.module('checkin')
         }
       };
 
-
       $scope.users.getNextPage = function() {
         if (this.busy) { return; }
-        if (this.nextPage >= this.totalPages) { return; }
-        $search.sticky('refresh');
 
         this.busy = true;
+        this.nextPage = this.nextPage + 1;
 
         UserService.getUsers({
+          text: getQuery(),
           page: this.nextPage,
-        }).then(function(response) {
-          console.log(response.data);
-
-          this.users = this.users.concat(response.data.users);
-
-          this.totalUsers = response.data.totalUsers;
-          this.totalPages = response.data.totalPages;
-          this.nextPage += 1;
-          this.busy = false;
-
-          $search.sticky('refresh');
-        }.bind(this));
+        }).then(loadFromResponse.bind(this));
       };
 
+      $scope.users.getNextPage();
+
+      function loadFromResponse(response) {
+        console.log(response.data);
+
+        this.users = this.users.concat(response.data.users);
+
+        this.totalUsers = response.data.totalUsers;
+        this.totalPages = response.data.totalPages;
+        this.nextPage = this.nextPage + 1;
+        this.busy = false;
+
+        $search.sticky('refresh');
+      }
 
       $scope.checkin = function(userId) {
-        UserService.checkin(userId)
-          .then(function(data) {
-            console.log('checked in', data);
-          });
+        console.log('checkin', userId);
+        // UserService.checkin(userId)
+        //   .then(function(data) {
+        //     console.log('checked in', data);
+        //   });
       };
 
       $scope.checkout = function(userId) {
-        UserService.checkout(userId)
-          .then(function(data) {
-            console.log('checked out', data);
-          });
+        console.log('checkout', userId);
+        // UserService.checkout(userId)
+        //   .then(function(data) {
+        //     console.log('checked out', data);
+        //   });
       };
     }
   ]);

@@ -14,7 +14,6 @@ var libFiles = {
     angular: [
       'app/bower_components/angular/angular.min.js',
       'app/bower_components/angular-ui-router/release/angular-ui-router.min.js',
-      'app/bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js',
     ],
     ui: [
       'app/bower_components/jquery/dist/jquery.min.js',
