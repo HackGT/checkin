@@ -4,7 +4,12 @@
     <div class="ui sticky">
       <div class="ui search">
         <div class="ui icon input fluid">
-          <input class="prompt" type="text" placeholder="name/email...">
+          <input
+            class="prompt"
+            type="text"
+            ng-model="query"
+            ng-change="searchUsers()"
+            placeholder="name/email..."/>
           <i class="search icon"></i>
         </div>
       </div>
@@ -12,10 +17,7 @@
   </div>
 
   <div class="userList">
-    <table class="ui single line selectable table users-table"
-      infinite-scroll='users.getNextPage()'
-      infinite-scroll-disabled='users.busy || users.nextPage >= users.totalPages'
-      infinite-scroll-distance='3'>
+    <table class="ui single line selectable table users-table">
       <thead>
         <tr>
           <th>Name</th>
@@ -36,6 +38,13 @@
         </tr>
       </tbody>
     </table>
+
+    <div
+      ng-hide="users.nextPage >= users.totalPages"
+      class="ui button fluid primary"
+      ng-click="users.getNextPage()">
+      Next Page
+    </div>
     <div ng-show="users.busy" class="ui icon message">
       <i class="notched circle loading icon"></i>
       <div class="content">
