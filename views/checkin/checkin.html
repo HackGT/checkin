@@ -40,7 +40,7 @@
     </table>
 
     <div
-      ng-hide="users.nextPage >= users.totalPages"
+      ng-hide="users.busy || users.nextPage >= users.totalPages"
       class="ui button fluid primary"
       ng-click="users.getNextPage()">
       Next Page
