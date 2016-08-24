@@ -59,12 +59,18 @@
   <div class="ui modal userDetails">
     <div class="header">{{selectedUser.profile.name}}</div>
     <div class="content">
-      {{selectedUser.email}}
+      {{selectedUser.email}} //
+      {{selectedUser.school}} //
+      {{selectedUser.phone}}
     </div>
     <div class="actions">
       <div class="ui button"
         ng-click="setSelectedUser(null)">
         Close
+      </div>
+      <div class="ui button primary"
+        ng-click="checkin(selectedUser._id)">
+        Check-in!
       </div>
     </div>
   </div>
