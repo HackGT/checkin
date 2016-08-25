@@ -31,6 +31,13 @@
       <div
         class="item"
         ng-repeat="volunteer in selectedGroup.volunteers">
+        <div class="right floated content">
+          <button
+            class="tiny red basic ui icon button"
+            ng-click="removeVolunteerFromGroup(volunteer, selectedGroup)">
+            <i class="icon remove"></i>
+          </button>
+        </div>
         <div class="content">
           <div class="header">{{volunteer.profile.name}}</div>
           <a href="mailto:{{volunteer.email}}">

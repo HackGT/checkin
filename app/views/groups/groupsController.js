@@ -48,6 +48,16 @@ angular.module('checkin')
           });
       };
 
+      $scope.removeVolunteerFromGroup = function(user, group) {
+        GroupService.removeVolunteerFromGroup(user._id, group._id)
+          .then(function(response) {
+            $scope.selectedGroup.volunteers.splice(
+              $scope.selectedGroup.volunteers.findIndex(function(elem) {
+                return elem._id === response.data._id;
+              }), 1);
+          });
+      };
+
       // TODO move this to a directive
       $('.add-volunteer').search({
         apiSettings: {
