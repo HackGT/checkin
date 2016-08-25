@@ -21,7 +21,7 @@ angular.module('checkin')
             text: options.text,
             page: options.page,
             size: options.size,
-            group: options.group,
+            group: options.groupId,
           }) : base;
 
         return $http.get(url);
