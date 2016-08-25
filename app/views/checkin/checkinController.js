@@ -28,6 +28,7 @@ angular.module('checkin')
         // this is all a low-key workaround for $http's lack of cancel()
         //jshint -W120
         var thisQuery = currentQuery = UserService.getUsers({
+          page: 0, // indicate that we want this to be paged (size is default 50)
           text: query,
         });
         //jshint +W120
@@ -47,6 +48,17 @@ angular.module('checkin')
           nextPage: 0,
           totalPages: 0,
           totalUsers: 0,
+          getNextPage: function() {
+            if (this.busy) { return; }
+
+            this.busy = true;
+            this.nextPage = this.nextPage + 1;
+
+            UserService.getUsers({
+              text: getQuery(),
+              page: this.nextPage,
+            }).then(loadFromResponse.bind(this));
+          },
         };
       }
       resetUserList();
@@ -61,18 +73,6 @@ angular.module('checkin')
         } else {
           $userDetails.modal('hide');
         }
-      };
-
-      $scope.users.getNextPage = function() {
-        if (this.busy) { return; }
-
-        this.busy = true;
-        this.nextPage = this.nextPage + 1;
-
-        UserService.getUsers({
-          text: getQuery(),
-          page: this.nextPage,
-        }).then(loadFromResponse.bind(this));
       };
 
       $scope.users.getNextPage();
