@@ -43,8 +43,8 @@ angular.module('checkin')
       $scope.addNewVolunteer = function(user, group) {
         GroupService.addVolunteerToGroup(user._id, group._id)
           .then(function(response) {
-            console.log(response.data);
-            // $scope.selectedGroup.volunteers.push(response.data)
+            $scope.selectedGroup.volunteers.push(response.data);
+            $scope.setSelectedNewVolunteer(null);
           });
       };
 

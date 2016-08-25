@@ -33,10 +33,15 @@
         ng-repeat="volunteer in selectedGroup.volunteers">
         <div class="content">
           <div class="header">{{volunteer.profile.name}}</div>
-          {{volunteer.email}}//{{volunteer.confirmation.phone}}
+          <a href="mailto:{{volunteer.email}}">
+            {{volunteer.email}}</a>
+          //
+          <a href="tel:{{volunteer.confirmation.phone}}">
+            {{volunteer.confirmation.phone}}</a>
         </div>
       </div>
     </div>
+    <div ng-show="!selectedGroup.volunteers.length">No volunteers</div>
     <div class="ui search add-volunteer" ng-hide="selectedNewVolunteer">
       <div class="ui icon input">
         <input class="prompt" type="text" placeholder="name/email...">
@@ -51,7 +56,11 @@
         <div class="header">{{selectedNewVolunteer.profile.name}}</div>
         <div class="meta">{{selectedNewVolunteer.profile.school}}</div>
         <div class="description">
-          {{selectedNewVolunteer.email}}//{{selectedNewVolunteer.confirmation.phone}}
+          <a href="mailto:{{selectedNewVolunteer.email}}">
+            {{selectedNewVolunteer.email}}</a>
+          //
+          <a href="tel:{{selectedNewVolunteer.confirmation.phone}}">
+            {{selectedNewVolunteer.confirmation.phone}}</a>
         </div>
       </div>
       <div class="extra content">
