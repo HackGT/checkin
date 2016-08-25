@@ -2,22 +2,21 @@ angular.module('checkin')
   .controller('ToolbarController', [
     '$scope',
     '$state',
+    '$rootScope',
     'Session',
-    function($scope, $state, Session) {
+    function($scope, $state, $rootScope, Session) {
       var user = Session.getUser();
-      console.log(user);
-      $scope.currentState = $state.current.name;
 
       $scope.states = ([
         {
           name: 'app.checkin',
           title: 'Checkin',
         },
-        // {
-        //   name: 'app.groups',
-        //   title: 'Groups',
-        //   adminOnly: true,
-        // }
+        {
+          name: 'app.groups',
+          title: 'Groups',
+          adminOnly: true,
+        }
       ]).filter(function(state) {
         return !(state.adminOnly && !user.admin);
       });

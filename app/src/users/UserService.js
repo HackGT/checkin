@@ -10,12 +10,18 @@ angular.module('checkin')
       var UserService = {};
 
       UserService.getUsers = function(options) {
+        if (options.page !== undefined || options.size !== undefined) {
+          options.page = options.page || 0;
+          options.size = options.size || 50;
+        }
+
         // TODO [adai] yes this is kinda dumb and should be better
         var url = options ? users + '?' + $.param(
           {
             text: options.text,
-            page: options.page ? options.page : 0,
-            size: options.size ? options.size : 50
+            page: options.page,
+            size: options.size,
+            group: options.group,
           }) : base;
 
         return $http.get(url);

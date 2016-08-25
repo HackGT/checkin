@@ -32,12 +32,17 @@ angular.module('checkin')
             },
           })
           .state('app.checkin', {
-            url: '/',
+            url: '/checkin',
             templateUrl: 'views/checkin/checkin.html',
             controller: 'CheckinController',
+          })
+          .state('app.groups', {
+            url: '/groups',
+            templateUrl: 'views/groups/groups.html',
+            controller: 'GroupsController',
           });
 
-        $urlRouterProvider.otherwise('/');
+        $urlRouterProvider.otherwise('/checkin');
     }
   ])
   .run([
@@ -50,7 +55,7 @@ angular.module('checkin')
       Session){
 
       $rootScope.$on('$stateChangeSuccess', function() {
-         document.body.scrollTop = document.documentElement.scrollTop = 0;
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
       });
 
       $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {

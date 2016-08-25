@@ -4,8 +4,8 @@
       <a
         ng-repeat="state in states"
         class="item"
-        ng-class="{active: state.name.indexOf(currentState) === 0 }"
-        ui-sref="{{state.name}}">
+        ui-sref="{{state.name}}"
+        ui-sref-active="active">
         {{state.title}}
       </a>
       <div class="right item">
