@@ -1,7 +1,13 @@
-<header class="ui vertical masthead center aligned segment">
+<header class="ui vertical grey inverted masthead center aligned segment">
   <div class="ui container">
-    <div class="ui large secondary menu">
-      <h1 class="item">{{title}}</h1>
+    <div class="ui inverted large secondary menu">
+      <a
+        ng-repeat="state in states"
+        class="item"
+        ui-sref="{{state.name}}"
+        ui-sref-active="active">
+        {{state.title}}
+      </a>
       <div class="right item">
         <a class="ui primary button logout">Logout</a>
       </div>
