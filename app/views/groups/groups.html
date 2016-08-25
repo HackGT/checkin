@@ -1,83 +1,96 @@
-<div class="ui equal width stackable grid">
-  <!-- List of groups -->
-  <div class="column">
-    <h2 class="header">Groups</h2>
-    <div class="ui large celled selection list">
+<div class="ui segments">
+<!-- List of groups -->
+<div class="ui segment">
+  <h1 class="header">Groups</h1>
+  <div class="ui divider"></div>
+  <div class="ui large divided selection list">
+    <div
+      class="item"
+      ng-repeat="group in groups"
+      ng-click="selectGroup(group)"
+      ng-class="{ active: selectedGroup === group}">
       <div
-        class="item"
-        ng-repeat="group in groups"
-        ng-click="selectGroup(group)"
-        ng-class="{ active: selectedGroup === group}">
-        <div
-          class="content">
-          {{group.name}}
-        </div>
-      </div>
-    </div>
-    <div ng-show="groups.length === 0">No groups</div>
-    <div class="ui action input">
-      <input type="text" placeholder="new group name..." ng-model="newGroupName">
-      <div class="ui green button" ng-click="createGroup(newGroupName)">
-        Create group
+        class="content">
+        {{group.name}}
       </div>
     </div>
   </div>
 
-  <!-- Details about group -->
-  <div class="column" ng-show="selectedGroup">
-    <h2 class="header">Details // {{selectedGroup.name}}</h2>
-    <h3 class="header">Volunteers</h3>
-    <div class="ui large celled selection list">
-      <div
-        class="item"
-        ng-repeat="volunteer in selectedGroup.volunteers">
-        <div class="right floated content">
-          <button
-            class="tiny red basic ui icon button"
-            ng-click="removeVolunteerFromGroup(volunteer, selectedGroup)">
-            <i class="icon remove"></i>
-          </button>
-        </div>
-        <div class="content">
-          <div class="header">{{volunteer.profile.name}}</div>
-          <a href="mailto:{{volunteer.email}}">
-            {{volunteer.email}}</a>
-          //
-          <a href="tel:{{volunteer.confirmation.phone}}">
-            {{volunteer.confirmation.phone}}</a>
-        </div>
-      </div>
-    </div>
-    <div ng-show="!selectedGroup.volunteers.length">No volunteers</div>
-    <div class="ui search add-volunteer" ng-hide="selectedNewVolunteer">
-      <div class="ui icon input">
-        <input class="prompt" type="text" placeholder="name/email...">
-        <i class="search icon"></i>
-      </div>
-      <div class="results"></div>
-    </div>
-    <div
-      ng-show="selectedNewVolunteer"
-      class='ui card'>
-      <div class="content">
-        <div class="header">{{selectedNewVolunteer.profile.name}}</div>
-        <div class="meta">{{selectedNewVolunteer.profile.school}}</div>
-        <div class="description">
-          <a href="mailto:{{selectedNewVolunteer.email}}">
-            {{selectedNewVolunteer.email}}</a>
-          //
-          <a href="tel:{{selectedNewVolunteer.confirmation.phone}}">
-            {{selectedNewVolunteer.confirmation.phone}}</a>
-        </div>
-      </div>
-      <div class="extra content">
-        <div class="ui two buttons">
-          <div class="ui basic green button"
-            ng-click="addNewVolunteer(selectedNewVolunteer, selectedGroup)">Add Volunteer</div>
-          <div class="ui basic red button"
-            ng-click="setSelectedNewVolunteer(null)">Close</div>
-        </div>
-      </div>
+  <div ng-show="groups.length === 0">No groups</div>
+  <div class="ui action input">
+    <input type="text" placeholder="new group name..." ng-model="newGroupName">
+    <div class="ui green button" ng-click="createGroup(newGroupName)">
+      Create group
     </div>
   </div>
+</div>
+
+<!-- Details about group -->
+<div class="ui segment" ng-show="selectedGroup">
+  <h2 class="header">Details // {{selectedGroup.name}}</h2>
+  <div class="ui divider"></div>
+  <div class="ui stackable divided equal width grid">
+    <div class="column">
+
+      <h3 class="header">Volunteers</h3>
+      <div class="ui large celled selection list">
+        <div
+          class="item"
+          ng-repeat="volunteer in selectedGroup.volunteers">
+          <div class="right floated content">
+            <button
+              class="tiny red basic ui icon button"
+              ng-click="removeVolunteerFromGroup(volunteer, selectedGroup)">
+              <i class="icon remove"></i>
+            </button>
+          </div>
+          <div class="content">
+            <div class="header">{{volunteer.profile.name}}</div>
+            <a href="mailto:{{volunteer.email}}">
+              {{volunteer.email}}</a>
+            //
+            <a href="tel:{{volunteer.confirmation.phone}}">
+              {{volunteer.confirmation.phone}}</a>
+          </div>
+        </div>
+      </div>
+
+      <div ng-show="!selectedGroup.volunteers.length">No volunteers</div>
+
+      <div class="ui search add-volunteer" ng-hide="selectedNewVolunteer">
+        <div class="ui icon input">
+          <input class="prompt" type="text" placeholder="name/email...">
+          <i class="search icon"></i>
+        </div>
+        <div class="results"></div>
+      </div>
+      <div
+        ng-show="selectedNewVolunteer"
+        class='ui card'>
+        <div class="content">
+          <div class="header">{{selectedNewVolunteer.profile.name}}</div>
+          <div class="meta">{{selectedNewVolunteer.profile.school}}</div>
+          <div class="description">
+            <a href="mailto:{{selectedNewVolunteer.email}}">
+              {{selectedNewVolunteer.email}}</a>
+            //
+            <a href="tel:{{selectedNewVolunteer.confirmation.phone}}">
+              {{selectedNewVolunteer.confirmation.phone}}</a>
+          </div>
+        </div>
+        <div class="extra content">
+          <div class="ui two buttons">
+            <div class="ui basic green button"
+              ng-click="addNewVolunteer(selectedNewVolunteer, selectedGroup)">Add Volunteer</div>
+            <div class="ui basic red button"
+              ng-click="setSelectedNewVolunteer(null)">Close</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <h3>Users</h3>
+    </div>
+  </div>
+</div>
 </div>
