@@ -58,20 +58,28 @@ angular.module('checkin')
           });
       };
 
-      // TODO move this to a directive
+      // TODO move this to a directive?
       $('.add-volunteer').search({
         apiSettings: {
           responseAsync: function(settings, callback) {
             var query = settings.urlData.query;
             UserService.getUsers({text: settings.urlData.query})
               .then(function(serverResponse) {
-                results = serverResponse.data.users.map(function(user) {
-                  return {
-                    title: user.profile.name || user.email,
-                    description: user.profile.name ? user.email : undefined,
-                    user: user,
-                  };
-                });
+                results = serverResponse.data.users
+                  // filter out volunteers that are already selected
+                  .filter(function(user) {
+                    return $scope.selectedGroup.volunteers.findIndex(function(volunteer) {
+                      return volunteer._id === user._id;
+                    }) === -1;
+                  })
+                  // map server response to match ui search's expected format
+                  .map(function(user) {
+                    return {
+                      title: user.profile.name || user.email,
+                      description: user.profile.name ? user.email : undefined,
+                      user: user,
+                    };
+                  });
                 callback({
                   results: results,
                 });
