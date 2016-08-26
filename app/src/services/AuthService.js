@@ -33,6 +33,20 @@ angular.module('checkin')
             email: email,
             password: password,
           })
+          .then(function(response) {
+            user = response.data.user;
+            if (
+            !(user.admin ||
+              (user.checkin &&
+                (user.checkin.groups.length > 0 ||
+                  user.checkin.all)
+                )
+              )
+            ) {
+              throw new Error('User is not an admin or volunteer');
+            }
+            return response;
+          })
           .then(loginSuccess, loginFailure);
       };
 
