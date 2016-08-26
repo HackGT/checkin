@@ -53,7 +53,7 @@ angular.module('checkin')
         // groups that the user can checkin the and attendee is a member of
         if (!(me.admin || (me.checkin && me.checkin.all))) {
           var groupId = attendee.groups.find(function(groupId) {
-            return me.check.groups.indexOf(groupId) !== -1;
+            return me.checkin.groups.indexOf(groupId) !== -1;
           });
           url = groups + groupId + '/users/' + attendeeId + '/checkin';
         }
@@ -70,7 +70,7 @@ angular.module('checkin')
         // groups that the user can checkout the and attendee is a member of
         if (!(me.admin || (me.checkin && me.checkin.all))) {
           var groupId = attendee.groups.find(function(groupId) {
-            return me.check.groups.indexOf(groupId) !== -1;
+            return me.checkin.groups.indexOf(groupId) !== -1;
           });
           url = groups + groupId + '/users/' + attendeeId + '/checkout';
         }
