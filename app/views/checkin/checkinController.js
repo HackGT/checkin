@@ -26,7 +26,7 @@ angular.module('checkin')
 
         if (query === currentQuery) { return; }
         currentQuery = query;
-        
+
         // this is all a low-key workaround for $http's lack of cancel()
         UserService.getUsers({
           page: 0, // indicate that we want this to be paged (size is default 50)
@@ -51,12 +51,13 @@ angular.module('checkin')
             if (this.busy) { return; }
 
             this.busy = true;
-            this.nextPage = this.nextPage + 1;
 
             UserService.getUsers({
               text: getQuery(),
               page: this.nextPage,
             }).then(loadFromResponse.bind(this));
+
+            this.nextPage = this.nextPage + 1;
           },
         };
       }
@@ -89,20 +90,20 @@ angular.module('checkin')
         $search.sticky('refresh');
       }
 
-      $scope.checkin = function(userId) {
-        console.log('checkin', userId);
-        // UserService.checkin(userId)
-        //   .then(function(data) {
-        //     console.log('checked in', data);
-        //   });
+      $scope.checkin = function(user) {
+        console.log('checkin', user);
+        UserService.checkin(user)
+          .then(function(data) {
+            console.log('checked in', data);
+          });
       };
 
-      $scope.checkout = function(userId) {
-        console.log('checkout', userId);
-        // UserService.checkout(userId)
-        //   .then(function(data) {
-        //     console.log('checked out', data);
-        //   });
+      $scope.checkout = function(user) {
+        console.log('checkout', user);
+        UserService.checkout(userId)
+          .then(function(data) {
+            console.log('checked out', data);
+          });
       };
     }
   ]);
