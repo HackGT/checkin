@@ -28,7 +28,7 @@ angular.module('checkin')
         GroupService.getVolunteers(group._id).then(function(response) {
           $scope.selectedGroup.volunteers = response.data.volunteers;
         });
-        UserService.getUsers({ groupId: group._id }).then(function(response) {
+        UserService.getUsers({ group: group._id }).then(function(response) {
           $scope.selectedGroup.users = response.data.users;
         });
       };
