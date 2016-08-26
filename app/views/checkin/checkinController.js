@@ -64,8 +64,9 @@ angular.module('checkin')
       resetUserList();
 
       $scope.selectedUser = null;
+      var $userDetails = $('.userDetails');
+
       $scope.setSelectedUser = function(user) {
-        var $userDetails = $('.userDetails');
         $userDetails.modal();
         $scope.selectedUser = user;
         if (user) {
@@ -95,14 +96,18 @@ angular.module('checkin')
         UserService.checkin(user)
           .then(function(data) {
             console.log('checked in', data);
+            user.status.checkedIn = true;
+            $userDetails.modal('hide');
           });
       };
 
       $scope.checkout = function(user) {
         console.log('checkout', user);
-        UserService.checkout(userId)
+        UserService.checkout(user)
           .then(function(data) {
             console.log('checked out', data);
+            user.status.checkedIn = false;
+            $userDetails.modal('hide');
           });
       };
     }
