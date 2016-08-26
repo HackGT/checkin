@@ -51,9 +51,9 @@ angular.module('checkin')
         var me = Session.getUser();
         // if the user is not omnipotent, find the intersection of between
         // groups that the user can checkin the and attendee is a member of
-        if (!(user.admin || (user.checkin && user.checkin.all))) {
+        if (!(me.admin || (me.checkin && me.checkin.all))) {
           var groupId = attendee.groups.find(function(groupId) {
-            return user.check.groups.indexOf(groupId) !== -1;
+            return me.check.groups.indexOf(groupId) !== -1;
           });
           url = groups + groupId + '/users/' + attendeeId + '/checkin';
         }
@@ -68,9 +68,9 @@ angular.module('checkin')
         var me = Session.getUser();
         // if the user is not omnipotent, find the intersection of between
         // groups that the user can checkout the and attendee is a member of
-        if (!(user.admin || (user.checkin && user.checkin.all))) {
+        if (!(me.admin || (me.checkin && me.checkin.all))) {
           var groupId = attendee.groups.find(function(groupId) {
-            return user.check.groups.indexOf(groupId) !== -1;
+            return me.check.groups.indexOf(groupId) !== -1;
           });
           url = groups + groupId + '/users/' + attendeeId + '/checkout';
         }
