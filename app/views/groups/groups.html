@@ -28,7 +28,9 @@
 <!-- Details about group -->
 <div class="ui segment" ng-show="selectedGroup">
   <h2 class="header">Details // {{selectedGroup.name}}</h2>
+
   <div class="ui divider"></div>
+
   <div class="ui stackable divided equal width grid">
     <div class="column">
 
@@ -57,9 +59,12 @@
 
       <div ng-show="!selectedGroup.volunteers.length">No volunteers</div>
 
+      <div class="ui divider"></div>
+
+      <h4 class="header">Add Volunteer</h4>
       <div class="ui search add-volunteer" ng-hide="selectedNewVolunteer">
         <div class="ui icon input">
-          <input class="prompt" type="text" placeholder="name/email...">
+          <input class="prompt" type="text" placeholder="name/email..." />
           <i class="search icon"></i>
         </div>
         <div class="results"></div>
@@ -88,8 +93,57 @@
         </div>
       </div>
     </div>
+
     <div class="column">
-      <h3>Users</h3>
+      <h3 class="header">Users</h3>
+      <div class="ui celled list">
+        <div
+          class="item"
+          ng-repeat="user in selectedGroup.users">
+          {{user.profile.name}}
+        </div>
+      </div>
+
+      <div ng-show="!selectedGroup.group.length">No users in this group</div>
+
+      <div class="ui divider"></div>
+
+      <h4 class="header">Add Users</h4>
+      <div class="ui search add-user" ng-hide="selectedNewVolunteer">
+        <div class="ui icon input">
+          <input
+            class="prompt"
+            type="text"
+            placeholder="name/email..."
+            ng-change="searchUsers()"
+            ng-model="userQuery"/>
+          <i class="search icon"></i>
+        </div>
+        <div
+          class="ui primary button"
+          ng-if="selectedGroup.searchUsers.length"
+          ng-click="addUsersToGroup()">
+          Add users
+        </div>
+
+        <div
+          class="ui button"
+          ng-if="selectedGroup.searchUsers.length"
+          ng-click="addAllUsersToGroup()">
+          Add All Users
+        </div>
+      </div>
+      <div class="ui selection celled list">
+        <div
+          class="item"
+          ng-repeat="user in selectedGroup.searchUsers"
+          ng-class="{active: user.active}"
+          ng-click="user.active = !user.active">
+          <div class="header">{{user.profile.name || user.email}}</div>
+          {{user.email}} // {{user.confirmation.phone}}
+        </div>
+      </div>
+
     </div>
   </div>
 </div>

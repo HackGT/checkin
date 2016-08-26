@@ -3,7 +3,7 @@ angular.module('checkin')
     '$scope',
     'UserService',
     function($scope, UserService) {
-
+      // TODO make this a directive
       var $search = $('.userSearch > .sticky');
       $search.sticky({
         context: '.userList > table',
@@ -23,18 +23,17 @@ angular.module('checkin')
       $scope.searchUsers = function() {
         var query = getQuery();
         console.log("query:", query);
-        if (query === currentQuery) { return; }
 
+        if (query === currentQuery) { return; }
+        currentQuery = query;
+        
         // this is all a low-key workaround for $http's lack of cancel()
-        //jshint -W120
-        var thisQuery = currentQuery = UserService.getUsers({
+        UserService.getUsers({
           page: 0, // indicate that we want this to be paged (size is default 50)
           text: query,
-        });
-        //jshint +W120
-        thisQuery.then(function(response) {
+        }).then(function(response) {
           // if this is no longer the most recent query, then ignore
-          if (thisQuery !== currentQuery) { return; }
+          if (query !== currentQuery) { return; }
           resetUserList();
           loadFromResponse.bind($scope.users)(response);
         });

@@ -28,6 +28,9 @@ angular.module('checkin')
         GroupService.getVolunteers(group._id).then(function(response) {
           $scope.selectedGroup.volunteers = response.data.volunteers;
         });
+        UserService.getUsers({ groupId: group._id }).then(function(response) {
+          $scope.selectedGroup.users = response.data.users;
+        });
       };
 
       $scope.selectedNewVolunteer = null;
@@ -91,5 +94,69 @@ angular.module('checkin')
           $scope.setSelectedNewVolunteer(selection.user);
         },
       });
+
+      // TODO this needs to be in a directive
+      // (see almost exact copy of this code in CheckinController)
+      var currentQuery = null;
+      $scope.searchUsers = function() {
+        var query = getQuery();
+        console.log("query:", query);
+
+        if (!query || query === currentQuery) { return; }
+        currentQuery = query;
+
+        UserService.getUsers({
+          text: query,
+        }).then(function(response) {
+          if (query !== currentQuery) { return; }
+          console.log(response.data);
+
+          setSearchUsers(response.data.users);
+        });
+      };
+
+      function setSearchUsers (searchResults) {
+        searchResults = searchResults || $scope.selectedGroup.searchUsers;
+        $scope.selectedGroup.searchUsers = searchResults
+          // filter out any users that are already in this group
+          .filter(function(user) {
+            return $scope.selectedGroup.users.findIndex(function(groupUser) {
+              return groupUser._id === user._id;
+            }) === -1;
+          });
+      }
+
+      function getQuery() {
+        if (!$scope.userQuery || $scope.userQuery.length < 3) {
+          return null;
+        }
+        return $scope.userQuery;
+      }
+
+      $scope.addUsersToGroup = function() {
+        var selectedUsers = $scope.selectedGroup.searchUsers.filter(function(user) {
+          return user.active;
+        }).map(function(user) {
+          return user._id;
+        });
+
+        GroupService.addUsersToGroup($scope.selectedGroup._id, selectedUsers)
+          .then(function(response) {
+            $scope.selectedGroup.users = response.data.users;
+            setSearchUsers();
+          });
+      };
+
+      $scope.addAllUsersToGroup = function() {
+        var selectedUsers = $scope.selectedGroup.searchUsers.map(function(user) {
+          return user._id;
+        });
+
+        GroupService.addUsersToGroup($scope.selectedGroup._id, selectedUsers)
+          .then(function(response) {
+            $scope.selectedGroup.users = response.data.users;
+            setSearchUsers();
+          });
+      };
     }
   ]);

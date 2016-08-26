@@ -28,12 +28,12 @@ angular.module('checkin')
         return $http.delete(groups + groupId + '/volunteers/' + volunteerId);
       };
 
-      GroupService.addUsersToGroup = function(groupId, users) {
-        return $http.put(group + groupId, users);
+      GroupService.addUsersToGroup = function(groupId, userIds) {
+        return $http.put(groups + groupId + '/users', { users: userIds });
       };
 
-      GroupService.removeUsersFromGroup = function(groupId, users) {
-        return $http.delete(groups + groupId, users);
+      GroupService.removeUsersFromGroup = function(groupId, userIds) {
+        return $http.delete(groups + groupId + '/users', { users: userIds });
       };
 
       return GroupService;
