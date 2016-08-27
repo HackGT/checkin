@@ -35,7 +35,7 @@
     <div class="column">
 
       <h3 class="header">Volunteers</h3>
-      <div class="ui large celled selection list">
+      <div class="ui large divided selection list">
         <div
           class="item"
           ng-repeat="volunteer in selectedGroup.volunteers">
@@ -96,7 +96,7 @@
 
     <div class="column">
       <h3 class="header">Users</h3>
-      <div class="ui celled list">
+      <div class="ui divided list">
         <div
           class="item"
           ng-repeat="user in selectedGroup.users">
@@ -104,7 +104,7 @@
         </div>
       </div>
 
-      <div ng-show="!selectedGroup.group.length">No users in this group</div>
+      <div ng-show="!selectedGroup.users.length">No users in this group</div>
 
       <div class="ui divider"></div>
 

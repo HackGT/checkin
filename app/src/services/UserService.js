@@ -30,8 +30,6 @@ angular.module('checkin')
           options.size = options.size || 50;
         }
 
-        console.log(options);
-
         // TODO [adai] yes this is kinda dumb and should be better
         var url = options ? users + '?' + $.param(
           {
