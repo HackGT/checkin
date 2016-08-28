@@ -29,6 +29,7 @@
       <tbody>
         <tr
           class="item"
+          ng-class="{active: user.status.checkedIn}"
           ng-repeat="user in users.users"
           ng-click="setSelectedUser(user)">
           <td>{{user.profile.name}}</td>
@@ -68,9 +69,17 @@
         ng-click="setSelectedUser(null)">
         Close
       </div>
-      <div class="ui button primary"
-        ng-click="checkin(selectedUser._id)">
+      <div
+        class="ui button primary"
+        ng-hide="selectedUser.status.checkedIn"
+        ng-click="checkin(selectedUser)">
         Check-in!
+      </div>
+      <div
+        class="ui button primary"
+        ng-show="selectedUser.status.checkedIn"
+        ng-click="checkout(selectedUser)">
+        Check out
       </div>
     </div>
   </div>
