@@ -70,17 +70,36 @@
         Close
       </div>
       <div
-        class="ui button primary"
-        ng-hide="selectedUser.status.checkedIn"
-        ng-click="checkin(selectedUser)">
+        class="ui button primary approve"
+        ng-hide="selectedUser.status.checkedIn">
         Check-in!
       </div>
       <div
-        class="ui button primary"
-        ng-show="selectedUser.status.checkedIn"
-        ng-click="checkout(selectedUser)">
+        class="ui button primary deny"
+        ng-show="selectedUser.status.checkedIn">
         Check out
       </div>
     </div>
   </div>
+
+  <!-- <div class="ui modal smsNotifications">
+    <div class="header">Does {{selectedUser.profile.name}} want SMS notifications?</div>
+    <div class="content">
+      <p>We will be sending (a LIMITED NUMBER of) text messages with information
+        on food and logistics.</p>
+      <p>They can opt-out anytime in the application site's confirmation screen.</p>
+    </div>
+    <div class="actions">
+      <div class="actions">
+        <div
+          class="ui button green approve">
+          Yes!
+        </div>
+        <div
+          class="ui button red deny">
+          Opt-out
+        </div>
+      </div>
+    </div>
+  </div> -->
 </div>

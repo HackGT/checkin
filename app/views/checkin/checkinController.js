@@ -65,12 +65,36 @@ angular.module('checkin')
 
       $scope.selectedUser = null;
       var $userDetails = $('.userDetails');
+      var $smsNotifications = $('.smsNotifications');
 
       $scope.setSelectedUser = function(user) {
-        $userDetails.modal();
         $scope.selectedUser = user;
         if (user) {
-          $userDetails.modal('show');
+          $userDetails.modal({
+            // 'approval' = checking in
+            onApprove: function() {
+              checkin(user).then(function(user) {
+                // not working plz ignore
+                // if (!user.confirmation.wantsSMSNotifications) {
+                //   $smsNotifications.modal({
+                //     onDeny: function() {
+                //       user.confirmation.wantsSMSNotifications = false;
+                //       updateConfirmation(user);
+                //     },
+                //     onApprove: function() {
+                //       user.confirmation.wantsSMSNotifications = true;
+                //       updateConfirmation(user);
+                //     }
+                //   }).modal('show');
+                // }
+              });
+            },
+            onDeny: function() {
+              checkout(user).then(function(user) {
+                // nothing right now
+              });
+            }
+          }).modal('show');
         } else {
           $userDetails.modal('hide');
         }
@@ -91,24 +115,31 @@ angular.module('checkin')
         $search.sticky('refresh');
       }
 
-      $scope.checkin = function(user) {
-        console.log('checkin', user);
-        UserService.checkin(user)
+      function checkin(user) {
+        return UserService.checkin(user)
           .then(function(data) {
             console.log('checked in', data);
             user.status.checkedIn = true;
-            $userDetails.modal('hide');
+            return user;
           });
-      };
+      }
 
-      $scope.checkout = function(user) {
-        console.log('checkout', user);
-        UserService.checkout(user)
+      function checkout(user) {
+        return UserService.checkout(user)
           .then(function(data) {
             console.log('checked out', data);
             user.status.checkedIn = false;
-            $userDetails.modal('hide');
+            return user;
           });
-      };
+      }
+
+      // not working yet
+      // function updateConfirmation(user) {
+      //   return UserService.updateConfirmation(user)
+      //     .then(function(data) {
+      //       console.log('update confirmation', data);
+      //       return data;
+      //     });
+      // }
     }
   ]);

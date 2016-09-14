@@ -42,6 +42,15 @@ angular.module('checkin')
         return $http.get(url);
       };
 
+      // UserService.updateConfirmation = function(user) {
+      //   var id = user._id;
+      //   var confirmation = user.confirmation;
+      //
+      //   return $http.post(base + id + '/confirm', {
+      //     confirmation: confirmation,
+      //   });
+      // };
+
       UserService.checkin = function(attendee) {
         var attendeeId = attendee._id;
         var url = base + attendeeId + '/checkin';
